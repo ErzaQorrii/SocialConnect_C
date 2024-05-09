@@ -4,7 +4,7 @@
     flex-direction: column;
    margin: auto;
    margin-top: 200px;
-   background-color: aqua;
+   background-color: rgb(255, 153, 255);
    padding-bottom: 30px;
    width: 600px;
 
@@ -105,7 +105,7 @@ border-radius: 6px;
 
 .gray
 {
-    color: #676766;
+    color:black;
     background: #eaeaea;;
 }
 
