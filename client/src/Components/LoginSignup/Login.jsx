@@ -14,18 +14,14 @@ const Login = () => {
         error_list: [],
     });
 
-    // Update state based on form input changes
     const handleInput = (e) => {
         e.persist();
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    // Handle form submission
     const handleSubmission = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-        const endpoint = 'http://127.0.0.1:8000/api/auth/login'; // Change this to your actual login API endpoint
+        e.preventDefault(); 
 
-        // Fetch CSRF cookie before posting login data for Laravel backends
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post(endpoint, credentials).then(res => {
                 if (res.status === 200) {
