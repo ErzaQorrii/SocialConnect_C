@@ -163,11 +163,13 @@ const LoginSignup = ({ action: initialAction }) => {
     const endpoint = action === "Sign Up" ? 'http://127.0.0.1:8000/api/auth/register' : 'http://127.0.0.1:8000/api/auth/login';
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post(endpoint, credentials).then(res => {
+          console.log('API Response:', res);
             if (res.data.status === 200) {
                 if (action === "Sign Up") {
                     swal("Success", "Registration successful. Please log in.", "success").then((value) => {
-                        setAction("Login"); 
-                        navigate('/login'); 
+                      console.log('Navigating to login...');
+
+                       navigate('/login');
                     });
                 } else {
                    
