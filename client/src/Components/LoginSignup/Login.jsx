@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './LoginSignup.css'; // Ensure this path matches your CSS file for styles
-import user_icon from '../Assets/person.png'; // Ensure paths for assets are correct
+import './LoginSignup.css'; 
+import user_icon from '../Assets/person.png'; 
 import password_icon from '../Assets/password.png';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -12,31 +12,40 @@ const Login = () => {
         username: '',
         password: '',
         error_list: [],
+        
     });
 
     const handleInput = (e) => {
         e.persist();
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
+const handleSubmission = (e) => {
+    e.preventDefault(); 
+    const endpoint = 'http://127.0.0.1:8000/api/auth/login';
+    axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.post(endpoint, credentials).then(res => {
+            console.log('Data:', res.data); 
+            if (res.status === 200) {
+                localStorage.setItem('auth_token', res.data.token);
+                localStorage.setItem('auth_name', res.data.username); 
+                localStorage.setItem('auth_role', res.data.user.role);
+                console.log('Role received:', res.data.user.role); 
 
-    const handleSubmission = (e) => {
-        e.preventDefault(); 
-
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.post(endpoint, credentials).then(res => {
-                if (res.status === 200) {
-                    localStorage.setItem('auth_token', res.data.token);
-                    localStorage.setItem('auth_name', res.data.username);
-                    navigate('/user'); // Navigate to dashboard on successful login
+                if(res.data.user.role === 'admin') {
+                    navigate('/admin');
                 } else {
-                    swal("Warning", res.data.message, "warning"); // Display warning if login fails
+                    navigate('/user'); 
                 }
-            })
-            .catch(error => {
-                console.error('Login error:', error); // Log any error during login
-            });
+            } else {
+                swal("Warning", res.data.message, "warning"); 
+            }
+        })
+        .catch(error => {
+            console.error('Login error:', error); 
+            swal("Error", "An error occurred during login. Please try again.", "error");
         });
-    };
+    });
+};
 
     return (
         <div className='container'>
@@ -59,11 +68,13 @@ const Login = () => {
                     Lost Password? <span>Click Here!</span>
                 </div>
                 <div className="submit-container">
+                    
                     <button type="submit" className="submit">Log In</button>
-                </div>
-                <div className="signup-redirect">
+                    <div className="signup-redirect">
                     Don't have an account? <span onClick={() => navigate('/signup')} style={{ cursor: 'pointer', color: 'blue' }}>Sign up</span>
                 </div>
+                </div>
+               
             </form>
         </div>
     );
