@@ -24,18 +24,16 @@ const handleSubmission = (e) => {
     const endpoint = 'http://127.0.0.1:8000/api/auth/login';
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post(endpoint, credentials).then(res => {
-            console.log('Data:', res.data); 
-            if (res.status === 200) {
-                localStorage.setItem('auth_token', res.data.token);
-                localStorage.setItem('auth_name', res.data.username); 
-                localStorage.setItem('auth_role', res.data.user.role);
-                console.log('Role received:', res.data.user.role); 
+            const { token, user } = res.data.data; 
+            if (res.status === 200 &&  res.data.data.user) {
+            
+                localStorage.setItem('auth_token', token);
+                localStorage.setItem('auth_name', user.username);
+                localStorage.setItem('auth_role', user.role);
+                
+                console.log('Role received:', user.role);
+                navigate(user.role === 'admin' ? '/admin' : '/user');
 
-                if(res.data.user.role === 'admin') {
-                    navigate('/admin');
-                } else {
-                    navigate('/user'); 
-                }
             } else {
                 swal("Warning", res.data.message, "warning"); 
             }
