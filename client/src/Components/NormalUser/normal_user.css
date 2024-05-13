@@ -1,0 +1,38 @@
+
+.sidebar {
+  background-color: #2C3E50; 
+  color: black; 
+  height: 100vh; 
+  width: 250px; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+}
+
+.sidebar .menu-item {
+  font-size: 16px; 
+  padding: 10px 20px; 
+  transition: background-color 0.3s; 
+}
+
+.sidebar .menu-item:hover {
+  background-color: #34495E; 
+}
+
+.sidebar .menu-item .icon {
+  color: #18BC9C; 
+  margin-right: 10px;
+}
+
+.toggle-button {
+  background-color: #16A085; 
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%; 
+  border-top: 1px solid #fff; 
+  position: absolute; 
+  bottom: 0; 
+} 

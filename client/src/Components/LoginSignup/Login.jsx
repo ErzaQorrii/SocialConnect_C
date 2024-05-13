@@ -32,7 +32,7 @@ const handleSubmission = (e) => {
                 localStorage.setItem('auth_role', user.role);
                 
                 console.log('Role received:', user.role);
-                navigate(user.role === 'admin' ? '/admin' : '/user');
+                navigate(user.role === 'admin' ? '/admin' : '/home_user');
 
             } else {
                 swal("Warning", res.data.message, "warning"); 

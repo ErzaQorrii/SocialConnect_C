@@ -21,16 +21,24 @@
 
 // export default App;
 
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import Login from './Components/LoginSignup/Login';
 import Signup from './Components/LoginSignup/Signup';
 
 import Test_user from './Components/NormalUser/Test_user';
 import Test_admin from './Components/Admin/Test_admin';
+import Homepage_user from './Components/NormalUser/Homepage_user';
+import Contact from './Components/NormalUser/Contact';
+
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
+ 
+
+
+
   return (
     <BrowserRouter>
     <Routes>
@@ -38,7 +46,9 @@ function App() {
       <Route path="/login" element={<Login action="Login" />} />       
       <Route path="/signup" element={<Signup action="Sign Up" />} />             
       <Route path="/user" element={<Test_user />} />                
-      <Route path="/admin" element={<Test_admin />} />              
+      <Route path="/admin" element={<Test_admin />} />   
+      <Route path="/home_user" element={<Homepage_user/>}/>
+      <Route path="/contact" element={<Contact/>}/>        
     </Routes>
   </BrowserRouter>
   );
