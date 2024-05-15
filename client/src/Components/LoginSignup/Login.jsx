@@ -19,14 +19,43 @@ const Login = () => {
         e.persist();
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
+
+    const validateInputs = () =>
+        {
+            let errors = {};
+            let isValid = true;
+            if(!credentials.username)
+                {
+                    isValid = false;
+                     errors["username"] = "Username is required";
+                     
+                }
+            if(!credentials.password)
+                { 
+                    isValid = false;    
+                    errors["password"] = "Password is required";
+
+                }
+                else if (credentials.password.length < 8)
+                    {
+                        isValid = false;
+                        errors["password"] = "Password should have at least 8 charachters";
+                    }
+                    setCredentials({...credentials, error_list: errors});
+                    return isValid;
+        }
+
+
+
+
 const handleSubmission = (e) => {
     e.preventDefault(); 
+    if(validateInputs()){
     const endpoint = 'http://127.0.0.1:8000/api/auth/login';
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post(endpoint, credentials).then(res => {
             const { token, user } = res.data.data; 
             if (res.status === 200 &&  res.data.data.user) {
-            
                 localStorage.setItem('auth_token', token);
                 localStorage.setItem('auth_name', user.username);
                 localStorage.setItem('auth_role', user.role);
@@ -43,6 +72,8 @@ const handleSubmission = (e) => {
             swal("Error", "An error occurred during login. Please try again.", "error");
         });
     });
+}
+           
 };
 
     return (
@@ -56,10 +87,12 @@ const handleSubmission = (e) => {
                     <div className="input">
                         <img src={user_icon} alt="Username"/>
                         <input type="text" name="username" placeholder='Username' onChange={handleInput} />
+                        {credentials.error_list.username && <span className='error'>{credentials.error_list.username}</span>}
                     </div>
                     <div className="input">
                         <img src={password_icon} alt="Password"/>
                         <input type="password" name="password" placeholder='Password' onChange={handleInput} />
+                        {credentials.error_list.password && <span className='error'>{credentials.error_list.password}</span>}
                     </div>
                 </div>
                 <div className="forgot-password">
