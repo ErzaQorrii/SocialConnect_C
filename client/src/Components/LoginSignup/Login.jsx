@@ -87,8 +87,16 @@ const handleSubmission =  (e) => {
             }
         })
         .catch(error => {
+            let errors = {};
+
+            if(error.response.data.message === "Invalid credentials" && error.response.status === 401){
+                const message = error.response.data.message;
+                errors["password"] = message;
+                setCredentials({ ...credentials, error_list: errors });
+            } else {
+                swal("Error", "An error occurred during login. Please try again.", "error");
+            }
             console.error('Login error:', error); 
-            swal("Error", "An error occurred during login. Please try again.", "error");
         });
     });
 }
@@ -114,7 +122,6 @@ const handleSubmission =  (e) => {
                         <img src={password_icon} alt="Password"/>
                         <input type="password" name="password" placeholder='Password' onChange={handleInput} />
                         {credentials.error_list.password && <span className='error'>{credentials.error_list.password}</span>}
-
                     </div>
 
                 </div>

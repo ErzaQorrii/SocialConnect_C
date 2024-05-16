@@ -30,6 +30,7 @@ import Test_user from './Components/NormalUser/Test_user';
 import Test_admin from './Components/Admin/Test_admin';
 import Homepage_user from './Components/NormalUser/Homepage_user';
 // import Contact from './Components/NormalUser/Contact';
+import CreatePost from './Components/NormalUser/CreatePost';
 
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -48,9 +49,10 @@ function App() {
       <Route path="/user" element={<Test_user />} />                
       <Route path="/admin" element={<Test_admin />} />   
       <Route path="/home_user" element={<Homepage_user/>}/>
-      {/* <Route path="/contact" element={<Contact/>}/>         */}
+      <Route path="/create_post"element= {<CreatePost/>} />
     </Routes>
   </BrowserRouter>
+  
   );
 }
 
