@@ -20,7 +20,7 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    const validateInputs = () =>
+    const validateInputs = async () =>
         {
             let errors = {};
             let isValid = true;
@@ -30,25 +30,44 @@ const Login = () => {
                      errors["username"] = "Username is required";
                      
                 }
-            if(!credentials.password)
-                { 
-                    isValid = false;    
-                    errors["password"] = "Password is required";
-
-                }
-                else if (credentials.password.length < 8)
+                else
+                {
+                    try
                     {
-                        isValid = false;
-                        errors["password"] = "Password should have at least 8 charachters";
+                        const response =  await axios.post('http://127.0.0.1:8000/api/auth/check-username', { username: credentials.username });
+                        if(!response.data.exists)
+                            {
+                                isValid = false;
+                                errors["username"] = "Username does not exist";
+                            }
                     }
-                    setCredentials({...credentials, error_list: errors});
-                    return isValid;
-        }
+                    catch(error)
+                    {
+                        console.error("Error chechking username",error);
+                        errors["username"] = "An error occurred  while checking for username";
+                        isValid = false;
+                        console.log(error);
+                    
+                    }
+                }
+            
+                if (!credentials.password) {
+                    isValid = false;
+                    errors["password"] = "Password is required.";
+                } else if (credentials.password.length < 8) {
+                    isValid = false;
+                    errors["password"] = "Password should have at least 8 characters.";
+                }
+           
+        
+                setCredentials({ ...credentials, error_list: errors });
+                return isValid;
+            };
 
 
 
 
-const handleSubmission = (e) => {
+const handleSubmission =  (e) => {
     e.preventDefault(); 
     if(validateInputs()){
     const endpoint = 'http://127.0.0.1:8000/api/auth/login';
@@ -88,12 +107,16 @@ const handleSubmission = (e) => {
                         <img src={user_icon} alt="Username"/>
                         <input type="text" name="username" placeholder='Username' onChange={handleInput} />
                         {credentials.error_list.username && <span className='error'>{credentials.error_list.username}</span>}
+
                     </div>
+
                     <div className="input">
                         <img src={password_icon} alt="Password"/>
                         <input type="password" name="password" placeholder='Password' onChange={handleInput} />
                         {credentials.error_list.password && <span className='error'>{credentials.error_list.password}</span>}
+
                     </div>
+
                 </div>
                 <div className="forgot-password">
                     Lost Password? <span>Click Here!</span>

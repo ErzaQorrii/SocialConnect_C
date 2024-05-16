@@ -37,7 +37,7 @@
     margin-top: 55px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
  }
 .input{
 display: flex;
@@ -62,8 +62,9 @@ border-radius: 6px;
     background-color: transparent;
     border: none;
     outline: none;
-    color:white;
+    color:black;
     font-size: 19px;
+    
 }
 .forgot-password
 {
@@ -85,7 +86,10 @@ border-radius: 6px;
 {
     display: flex;
     gap: 30px;
-    margin: 60px auto;
+    /* margin: 60px auto; */
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 .submit{
 
@@ -111,8 +115,11 @@ border-radius: 6px;
 
 
 
-
-
+.error {
+    color: red;
+    font-size: 13px;
+    margin-left: 60px;
+}
 
 
 
