@@ -78,6 +78,7 @@ const handleSubmission =  (e) => {
                 localStorage.setItem('auth_token', token);
                 localStorage.setItem('auth_name', user.username);
                 localStorage.setItem('auth_role', user.role);
+                localStorage.setItem('user_id',user.id);
                 
                 console.log('Role received:', user.role);
                 navigate(user.role === 'admin' ? '/admin' : '/home_user');

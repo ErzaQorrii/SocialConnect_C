@@ -10,11 +10,14 @@ const Homepage_user = () => {
   const [posts, setPosts] = useState([]);
   const [pagination, setPagination] = useState({});
   const token = localStorage.getItem('auth_token');
+  const userId = localStorage.getItem('user_id'); // Ensure user_id is stored in localStorage
+  console.log(userId);
   const observer = useRef();
 
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
   };
+
 
   useEffect(() => {
     if (token) {
@@ -31,7 +34,8 @@ const Homepage_user = () => {
     }
   }, [token]);
 
-  const loadMorePosts = (page) => {
+
+  const loadMorePosts =  useCallback((page) => {
     console.log(`Loading more posts for page ${page}`);
     axios.get(`http://127.0.0.1:8000/api/posts?page=${page}`, {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -43,19 +47,37 @@ const Homepage_user = () => {
       console.log('Updated Pagination:', response.data.pagination);  
     })
     .catch(error => console.log("Error fetching more posts", error));
-  };
+  })
 
-  const lastPostElementRef = useCallback(node => {
+    const lastPostElementRef = useCallback(node => {
     if (observer.current) observer.current.disconnect();
 
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && pagination.has_more_pages) {
+     if (entries[0].isIntersecting && pagination.has_more_pages) {
         loadMorePosts(pagination.current_page + 1);
       }
-    });
+    },[token]);
 
-    if (node) observer.current.observe(node);
+     if (node) observer.current.observe(node);
   }, [pagination]);
+     
+     const handleDelete = (id) =>
+      {
+        axios.delete(`http://127.0.0.1:8000/api/posts/${id}`,{
+          headers: {'Authorization':`Bearer ${token}`}
+        })
+        .then(response =>
+          {
+            setPosts(posts.filter(post=>post.id !==id));
+            alert('Post deleted',response.data.message)
+          })
+          .catch(error => console.log("Error deleting post",error));
+      }
+      
+      const handleUpdate = (id)=>
+      {
+
+      };
 
      
 
@@ -74,6 +96,11 @@ const Homepage_user = () => {
             caption={post.content}
             likesCount={post.likes_count}
             comments={post.comments || []}
+            onDelete = {() =>handleDelete(post.id)}
+            onUpdate = {() => handleUpdate(post.id)}
+            currentUserId = {parseInt(userId,10)}
+            userId = {post.user_id}
+            
           />
         ))}
       </div>

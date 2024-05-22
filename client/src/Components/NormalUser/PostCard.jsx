@@ -3,13 +3,21 @@ import './postcard.css';
 import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'; 
 import flowerImage from '../Assets/flower.jpg';
 
-const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption, likesCount, comments, title }, ref) => {
+const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption, likesCount, comments, title,onDelete,onUpdate, currentUserId,userId }, ref) => {
   console.log('Post image URL:', postImageUrl);  
        const shouldShowReadMore = caption.length>100;
        const toggleExpand = () => {
         setIsExpanded(!isExpanded);
       };
       const [isExpanded, setIsExpanded] = useState(false); 
+      const handleDelete = () =>
+        {
+          onDelete();
+        }
+        const handleUpdate = () =>
+          {
+              onUpdate();
+          }
 
   return (
     <div className="post-card" ref={ref}>
@@ -45,6 +53,12 @@ const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption,
             <span className="comment-username">{comment.username}</span> {comment.text}
           </div>
         ))}
+        {currentUserId === userId &&(
+          <div>
+        <button onClick = {handleDelete}>Delete</button>
+        <button onClick= {handleUpdate}>Update</button>
+         </div>
+       )}
       </div>
     </div>
   );
