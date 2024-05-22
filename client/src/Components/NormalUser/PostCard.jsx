@@ -1,10 +1,15 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import './postcard.css';
 import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'; 
 import flowerImage from '../Assets/flower.jpg';
 
 const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption, likesCount, comments, title }, ref) => {
   console.log('Post image URL:', postImageUrl);  
+       const shouldShowReadMore = caption.length>100;
+       const toggleExpand = () => {
+        setIsExpanded(!isExpanded);
+      };
+      const [isExpanded, setIsExpanded] = useState(false); 
 
   return (
     <div className="post-card" ref={ref}>
@@ -22,7 +27,16 @@ const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption,
         <div className="likes">
           <FavoriteBorder /> {likesCount} likes
         </div>
-        <div className="caption">{caption}</div>
+        <div className={`caption ${isExpanded ? 'expanded' : 'collapsed'}`}>
+          {caption}
+        </div>
+        {
+          shouldShowReadMore && (
+            <span className = "read-more" onClick = {toggleExpand}>
+              {isExpanded ? ' Read less': 'Read more'}
+            </span>
+          )
+        }
         <div className="comments">
           <ChatBubbleOutline /> {comments.length} comments
         </div>

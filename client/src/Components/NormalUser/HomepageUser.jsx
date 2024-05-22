@@ -57,10 +57,12 @@ const Homepage_user = () => {
     if (node) observer.current.observe(node);
   }, [pagination]);
 
+     
+
   return (
     <div style={{ display: 'flex' }}>
       <SidebarComponent collapsed={collapsed} handleToggleSidebar={handleToggleSidebar} />
-      <div style={{ flex: 1, padding: '20px' }}>
+      <div className="content">
         {posts.map((post, index) => (
           <PostCard
             key={post.id}

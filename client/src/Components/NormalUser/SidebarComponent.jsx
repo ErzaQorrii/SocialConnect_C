@@ -2,7 +2,8 @@ import React from 'react';
 import { Home, PostAdd, Settings, Notifications, HelpOutline } from '@mui/icons-material';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useNavigate } from 'react-router-dom';
-import './normal_user.css';
+// import './normal_user.css';
+import './sideBar.css'
 
 const SidebarComponent = ({ collapsed, handleToggleSidebar }) => {
   const navigate = useNavigate();
