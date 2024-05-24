@@ -7,6 +7,7 @@ import TestUser from './Components/NormalUser/TestUser';
 import TestAdmin from './Components/Admin/TestAdmin';
 import HomepageUser from './Components/NormalUser/HomepageUser';
 import CreatePost from './Components/NormalUser/CreatePost';
+import EditPost from './Components/NormalUser/EditPost ';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 
@@ -25,6 +26,8 @@ function App() {
       <Route path="/admin" element={<TestAdmin />} />   
       <Route path="/home_user" element={<HomepageUser/>}/>
       <Route path="/create_post"element= {<CreatePost/>} />
+      <Route path="/edit-post/:id" element={<EditPost />} />
+
 
 
     </Routes>
