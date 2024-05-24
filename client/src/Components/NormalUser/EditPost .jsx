@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom'; 
+import axiosInstance from './axiosSetup';
+
 
 const EditPost = () => {
   const { id } = useParams();
@@ -10,11 +12,7 @@ const EditPost = () => {
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-
-    axios.get(`http://127.0.0.1:8000/api/posts/${id}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
+    axiosInstance.get(`/posts/${id}`)
     .then(response => {
       console.log('Fetched post data:', response.data); 
       if (response.data && response.data.title && response.data.content) {
@@ -54,18 +52,11 @@ const EditPost = () => {
       formData.append('image', post.image);
     }
 
-    const token = localStorage.getItem('auth_token');
-
-    if (!token) {
-      alert('Unauthorized: Please log in.');
-      return;
-    }
-
-    axios.post(`http://127.0.0.1:8000/api/posts/${id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
-      },
+    axiosInstance.post(`/posts/${id}`, formData, {
+        headers:
+        {
+            'Content-Type': 'multipart/form-data'
+        },
     })
     .then(res => {
         console.log('Update response:', res); 

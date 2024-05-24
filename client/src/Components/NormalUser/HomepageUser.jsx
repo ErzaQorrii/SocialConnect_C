@@ -5,6 +5,7 @@ import SidebarComponent from "./SidebarComponent";
 import "./normal_user.css";
 import "./postcard.css";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "./axiosSetup";
 
 const Homepage_user = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -21,28 +22,22 @@ const Homepage_user = () => {
   };
 
   useEffect(() => {
-    if (token) {
-      axios
-        .get("http://127.0.0.1:8000/api/posts", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
+    
+      axiosInstance.get('/posts')
+        .then(response => {
           setPosts(response.data.posts);
           setPagination(response.data.pagination);
           console.log("Posts:", response.data.posts);
           console.log("Pagination:", response.data.pagination);
         })
         .catch((error) => console.log("Error fetching posts", error));
-    }
-  }, [token]);
+    
+  },[]);
 
   const loadMorePosts = useCallback((page) => {
     console.log(`Loading more posts for page ${page}`);
-    axios
-      .get(`http://127.0.0.1:8000/api/posts?page=${page}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
+    axiosInstance.get(`/posts?page=${page}`)
+          .then((response) => {
         setPosts((prevPosts) => [...prevPosts, ...response.data.posts]);
         setPagination(response.data.pagination);
         console.log("More Posts:", response.data.posts);
@@ -60,9 +55,7 @@ const Homepage_user = () => {
           if (entries[0].isIntersecting && pagination.has_more_pages) {
             loadMorePosts(pagination.current_page + 1);
           }
-        },
-        [token]
-      );
+        });
 
       if (node) observer.current.observe(node);
     },
@@ -70,10 +63,7 @@ const Homepage_user = () => {
   );
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://127.0.0.1:8000/api/posts/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    axiosInstance.delete(`/posts/${id}`)
       .then((response) => {
         setPosts(posts.filter((post) => post.id !== id));
         alert("Post deleted", response.data.message);
