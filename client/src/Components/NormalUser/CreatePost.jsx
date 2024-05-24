@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import "./style.css";
-import axios from 'axios';
+import axiosInstance from './axiosSetup';
 
 const CreatePost = () => {
     const [InputErrorList, setInputErrorList] = useState({});
@@ -30,21 +29,9 @@ const CreatePost = () => {
             formData.append('image', Post.image);
         }
 
-        // Retrieve the token from storage
-        const token = localStorage.getItem('auth_token'); // or sessionStorage.getItem('auth_token')
-
-        if (!token) {
-            alert('Unauthorized: Please log in because of the token.');
-            return;
-        }
-
-        // Debug: Log the token
-        console.log('Token:', token);
-
-        axios.post('http://127.0.0.1:8000/api/posts', formData, {
+        axiosInstance.post('/posts', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${token}`
             },
         })
         .then(res => {
@@ -52,7 +39,6 @@ const CreatePost = () => {
         })
         .catch(error => {
             if (error.response) {
-                // Log detailed error response
                 console.error('Error response:', error.response);
                 console.error('Error data:', error.response.data);
                 console.error('Error status:', error.response.status);
@@ -66,10 +52,8 @@ const CreatePost = () => {
                     alert('Unauthorized: Please log in.');
                 }
             } else if (error.request) {
-                // Log request that triggered an error
                 console.error('Error request:', error.request);
             } else {
-                // Log any other errors
                 console.error('Error message:', error.message);
             }
         });
@@ -113,6 +97,7 @@ const CreatePost = () => {
                     <div className="submit-createpost">
                         <button type="submit" className="submit-button">Create Post</button>
                     </div>
+                    <div className='home_page_redirect'>Go to HomePage</div>
                 </form>
             </div>
         </div>

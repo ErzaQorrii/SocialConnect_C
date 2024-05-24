@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import axios from "axios";
 import PostCard from "./PostCard";
 import SidebarComponent from "./SidebarComponent";
 import "./normal_user.css";
@@ -11,7 +10,6 @@ const Homepage_user = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [posts, setPosts] = useState([]);
   const [pagination, setPagination] = useState({});
-  const token = localStorage.getItem("auth_token");
   const userId = localStorage.getItem("user_id");
   console.log(userId);
   const observer = useRef();
