@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom'; 
 import axiosInstance from './axiosSetup';
-
+import { useNavigation } from './navigationUtils';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -10,6 +10,8 @@ const EditPost = () => {
   const [inputErrorList, setInputErrorList] = useState({});
   const [post, setPost] = useState({ title: '', content: '', image: null });
   const [isLoading, setIsLoading] = useState(true); 
+  const { goToHomePage } = useNavigation();
+
 
   useEffect(() => {
     axiosInstance.get(`/posts/${id}`)
@@ -61,8 +63,8 @@ const EditPost = () => {
     .then(res => {
         console.log('Update response:', res); 
       alert(res.data.message);
-      navigate('/home_user'); 
-    })
+      goToHomePage();
+        })
     .catch(error => {
       if (error.response) {
         if (error.response.status === 422) {
@@ -117,6 +119,7 @@ const EditPost = () => {
           </div>
           <div className="submit-createpost">
             <button type="submit" className="submit-button">Update Post</button>
+            <button type="button" onClick={goToHomePage}> Go to home Page</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "./style.css";
 import axiosInstance from './axiosSetup';
+import { useNavigate } from 'react-router-dom';
+
 
 const CreatePost = () => {
     const [InputErrorList, setInputErrorList] = useState({});
@@ -9,6 +11,8 @@ const CreatePost = () => {
         content: '',
         image: null
     });
+    const navigate = useNavigate();
+
 
     const handleInput = (e) => {
         const { name, value, files } = e.target;
@@ -56,8 +60,15 @@ const CreatePost = () => {
             } else {
                 console.error('Error message:', error.message);
             }
+            
         });
+       
+       
     };
+    const goToHomePage = ()=>
+        {
+            navigate('/home_user');
+        }
 
     return (
         <div className="form-wrapper">
@@ -97,7 +108,8 @@ const CreatePost = () => {
                     <div className="submit-createpost">
                         <button type="submit" className="submit-button">Create Post</button>
                     </div>
-                    <div className='home_page_redirect'>Go to HomePage</div>
+                    <div className='home_page_redirect'>
+                        <button type="button" onClick={goToHomePage}>Go to HomePage</button></div>
                 </form>
             </div>
         </div>
