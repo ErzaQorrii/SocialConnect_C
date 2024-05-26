@@ -10,7 +10,9 @@ import { FaEllipsisH } from 'react-icons/fa';
 const PostCard = forwardRef(({id, username, profileImageUrl, postImageUrl, caption, likesCount, comments, title,onDelete,onUpdate, currentUserId,userId }, ref) => {
   console.log('Post image URL:', postImageUrl);  
    const [postComments ,setPostComments] = useState(comments);
+   const [showMenu, setShowMenu] = useState(false);
        const shouldShowReadMore = caption.length>100;
+       
        const toggleExpand = () => {
         setIsExpanded(!isExpanded);
       };
@@ -33,6 +35,9 @@ const PostCard = forwardRef(({id, username, profileImageUrl, postImageUrl, capti
         
           const handleCommentDelete = (commentId) => {
             setPostComments(postComments.filter(comment => comment.id !== commentId));
+          }; 
+           const toggleMenu = () => {
+            setShowMenu(!showMenu);
           };
           
           return (
@@ -42,8 +47,8 @@ const PostCard = forwardRef(({id, username, profileImageUrl, postImageUrl, capti
                 <span className="username">{username}</span>
                 {currentUserId === userId && (
                   <div className="menu-container">
-                    <FaEllipsisH onClick={toggleExpand} className="menu-icon" />
-                    {isExpanded && (
+                    <FaEllipsisH onClick={toggleMenu} className="menu-icon" />
+                    {showMenu && (
                       <div className="menu">
                         <button onClick={handleUpdate}>Edit</button>
                         <button onClick={handleDelete}>Delete</button>
