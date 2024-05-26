@@ -83,6 +83,7 @@ const Homepage_user = () => {
         {posts.map((post, index) => (
           <PostCard
             key={post.id}
+            id={post.id} 
             ref={posts.length === index + 1 ? lastPostElementRef : null}
             username={post.user ? post.user.name : "Unknown User"}
             profileImageUrl={

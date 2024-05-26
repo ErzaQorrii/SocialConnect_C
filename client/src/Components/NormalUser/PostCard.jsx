@@ -1,10 +1,15 @@
 import React, { forwardRef, useState } from 'react';
 import './postcard.css';
 import { FavoriteBorder, ChatBubbleOutline } from '@mui/icons-material'; 
-import flowerImage from '../Assets/flower.jpg';
+import flowerImage from '../Assets/flower.jpg'
+import CommentForm from './Comment/CommentForm';
+import CommentItem from './Comment/CommentItem ';
+import { FaEllipsisH } from 'react-icons/fa'; 
 
-const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption, likesCount, comments, title,onDelete,onUpdate, currentUserId,userId }, ref) => {
+
+const PostCard = forwardRef(({id, username, profileImageUrl, postImageUrl, caption, likesCount, comments, title,onDelete,onUpdate, currentUserId,userId }, ref) => {
   console.log('Post image URL:', postImageUrl);  
+   const [postComments ,setPostComments] = useState(comments);
        const shouldShowReadMore = caption.length>100;
        const toggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -18,50 +23,69 @@ const PostCard = forwardRef(({ username, profileImageUrl, postImageUrl, caption,
           {
               onUpdate();
           }
-
-  return (
-    <div className="post-card" ref={ref}>
-      <div className="post-header">
-        <img src={profileImageUrl} alt="Profile" className="profile-image" />
-        <span className="username">{username}</span>
-      </div>
-      <div className="post-title">
-        <h2>{title}</h2>
-      </div>
-      <div className="post-image">
-        <img src={postImageUrl || flowerImage} alt="Post" />
-      </div>
-      <div className="post-footer">
-        <div className="likes">
-          <FavoriteBorder /> {likesCount} likes
-        </div>
-        <div className={`caption ${isExpanded ? 'expanded' : 'collapsed'}`}>
-          {caption}
-        </div>
-        {
-          shouldShowReadMore && (
-            <span className = "read-more" onClick = {toggleExpand}>
-              {isExpanded ? ' Read less': 'Read more'}
-            </span>
-          )
-        }
-        <div className="comments">
-          <ChatBubbleOutline /> {comments.length} comments
-        </div>
-        {comments.map((comment, index) => (
-          <div key={index} className="comment">
-            <span className="comment-username">{comment.username}</span> {comment.text}
-          </div>
-        ))}
-        {currentUserId === userId &&(
-          <div>
-        <button onClick = {handleDelete}>Delete</button>
-        <button onClick= {handleUpdate}>Update</button>
-         </div>
-       )}
-      </div>
-    </div>
-  );
-});
+          const handleCommentCreated = (newComment) => {
+            setPostComments([...postComments, newComment]);
+          };
+        
+          const handleCommentUpdate = (updatedComment) => {
+            setPostComments(postComments.map(comment => comment.id === updatedComment.id ? updatedComment : comment));
+          };
+        
+          const handleCommentDelete = (commentId) => {
+            setPostComments(postComments.filter(comment => comment.id !== commentId));
+          };
+          
+          return (
+            <div className="post-card" ref={ref}>
+              <div className="post-header">
+                <img src={profileImageUrl} alt="Profile" className="profile-image" />
+                <span className="username">{username}</span>
+                {currentUserId === userId && (
+                  <div className="menu-container">
+                    <FaEllipsisH onClick={toggleExpand} className="menu-icon" />
+                    {isExpanded && (
+                      <div className="menu">
+                        <button onClick={handleUpdate}>Edit</button>
+                        <button onClick={handleDelete}>Delete</button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="post-title">
+                <h2>{title}</h2>
+              </div>
+              <div className="post-image">
+                <img src={postImageUrl || flowerImage} alt="Post" />
+              </div>
+              <div className="post-footer">
+                <div className="likes">
+                  <FavoriteBorder /> {likesCount} likes
+                </div>
+                <div className={`caption ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                  {caption}
+                </div>
+                {shouldShowReadMore && (
+                  <span className="read-more" onClick={toggleExpand}>
+                    {isExpanded ? 'Read less' : 'Read more'}
+                  </span>
+                )}
+                <div className="comments">
+                  <ChatBubbleOutline /> {postComments.length} comments
+                </div>
+                {postComments.map((comment) => (
+                  <CommentItem
+                    key={comment.id}
+                    comment={comment}
+                    onUpdate={handleCommentUpdate}
+                    onDelete={handleCommentDelete}
+                    currentUserId={currentUserId}
+                  />
+                ))}
+                <CommentForm postId={id} onCommentCreated={handleCommentCreated} />
+              </div>
+            </div>
+          );
+        });
 
 export default PostCard;
