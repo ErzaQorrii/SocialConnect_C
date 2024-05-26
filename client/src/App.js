@@ -10,6 +10,7 @@ import EditPost from "./Components/NormalUser/EditPost ";
 import NotAuthenticated from "./Components/NormalUser/NotAuthenticated";
 import PrivateRoute from "./Components/NormalUser/PrivateRoute";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ProfileComponent from "./Components/NormalUser/Profile/ProfileComponent";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/home_user" element={<PrivateRoute><HomepageUser /></PrivateRoute>} />
         <Route path="/create_post" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
         <Route path="/edit-post/:id" element={<PrivateRoute><EditPost /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><ProfileComponent /></PrivateRoute>} />
+
 
         {/* <Route path="/user" element={<TestUser />} />                
       <Route path="/admin" element={<TestAdmin />} />    */}

@@ -5,11 +5,15 @@ import { useNavigate } from 'react-router-dom';
 // import './normal_user.css';
 import './sideBar.css'
 import axiosInstance from './axiosSetup';
+import  useNavigation from './navigationUtils';
+
 
 const SidebarComponent = ({ collapsed, handleToggleSidebar }) => {
   const navigate = useNavigate();
   const handleCreatePostClick = () => navigate('/create_post');
   const token = localStorage.getItem('auth_token');
+  const { goToProfile } = useNavigation();
+
   const handleLogOutClick = async () =>
     {
       try 
@@ -36,7 +40,7 @@ const SidebarComponent = ({ collapsed, handleToggleSidebar }) => {
       <Menu>
         <MenuItem icon={<Home />}>Home</MenuItem>
         <MenuItem icon={<PostAdd />} onClick={handleCreatePostClick}>Create Post</MenuItem>
-        <MenuItem icon={<Settings />}>Settings</MenuItem>
+        <MenuItem icon={<Settings />}onClick={goToProfile}>Profile</MenuItem>
         <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         <MenuItem icon={<HelpOutline />}>Help</MenuItem>
         <MenuItem icon={<Logout />} onClick={handleLogOutClick}> Logout</MenuItem>

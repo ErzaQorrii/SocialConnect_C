@@ -8,11 +8,18 @@
     const goToHomePage = () =>
         {
             navigate('/home_user');
-        }
-
-        return{
-            goToHomePage,
         };
+
+      
+        const goToProfile = () =>
+            {
+                navigate('/profile');
+            };
+    return{
+        goToHomePage,
+        goToProfile,
+    };
+        
     };
 
-
+export default  useNavigation;

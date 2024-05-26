@@ -1,0 +1,161 @@
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Headings */
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  /* Form Styles */
+  form div {
+    margin-bottom: 20px;
+  }
+  
+  form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  form input:focus {
+    border-color: #4CAF50;
+  }
+  
+  form button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  form .text-danger {
+    display: block;
+    margin-top: 5px;
+  }
+  
+  /* Messages */
+  .text-success {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .text-danger {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    text-align: center;
+  }
+  
+  .profile-info p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .profile-info p strong {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Edit Button */
+  .profile-info button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-info button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Form Buttons */
+  form .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  form .form-buttons button[type="button"] {
+    background-color: #f44336;
+  }
+  
+  form .form-buttons button[type="button"]:hover {
+    background-color: #d32f2f;
+  }
+  /* Add image upload styles */
+.profile-image {
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+  }
+  
+  .image-upload {
+    text-align: center;
+  }
+  
+  .image-upload input {
+    display: none;
+  }
+  
+  .image-upload label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .image-upload label:hover {
+    background-color: #0056b3;
+  }
+  
