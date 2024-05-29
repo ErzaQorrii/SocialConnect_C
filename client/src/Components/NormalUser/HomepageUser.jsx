@@ -14,28 +14,29 @@ const Homepage_user = () => {
   console.log(userId);
   const observer = useRef();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
   };
 
   useEffect(() => {
-    
-      axiosInstance.get('/posts')
-        .then(response => {
-          setPosts(response.data.posts);
-          setPagination(response.data.pagination);
-          console.log("Posts:", response.data.posts);
-          console.log("Pagination:", response.data.pagination);
-        })
-        .catch((error) => console.log("Error fetching posts", error));
-    
-  },[]);
+    axiosInstance
+      .get("/posts")
+      .then((response) => {
+        setPosts(response.data.posts);
+        setPagination(response.data.pagination);
+        console.log("Posts:", response.data.posts);
+        console.log("Pagination:", response.data.pagination);
+      })
+      .catch((error) => console.log("Error fetching posts", error));
+  }, []);
 
   const loadMorePosts = useCallback((page) => {
     console.log(`Loading more posts for page ${page}`);
-    axiosInstance.get(`/posts?page=${page}`)
-          .then((response) => {
+    axiosInstance
+      .get(`/posts?page=${page}`)
+      .then((response) => {
         setPosts((prevPosts) => [...prevPosts, ...response.data.posts]);
         setPagination(response.data.pagination);
         console.log("More Posts:", response.data.posts);
@@ -48,12 +49,11 @@ const Homepage_user = () => {
     (node) => {
       if (observer.current) observer.current.disconnect();
 
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && pagination.has_more_pages) {
-            loadMorePosts(pagination.current_page + 1);
-          }
-        });
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && pagination.has_more_pages) {
+          loadMorePosts(pagination.current_page + 1);
+        }
+      });
 
       if (node) observer.current.observe(node);
     },
@@ -61,7 +61,8 @@ const Homepage_user = () => {
   );
 
   const handleDelete = (id) => {
-    axiosInstance.delete(`/posts/${id}`)
+    axiosInstance
+      .delete(`/posts/${id}`)
       .then((response) => {
         setPosts(posts.filter((post) => post.id !== id));
         alert("Post deleted", response.data.message);
@@ -83,7 +84,7 @@ const Homepage_user = () => {
         {posts.map((post, index) => (
           <PostCard
             key={post.id}
-            id={post.id} 
+            id={post.id}
             ref={posts.length === index + 1 ? lastPostElementRef : null}
             username={post.user ? post.user.name : "Unknown User"}
             profileImageUrl={
@@ -96,7 +97,8 @@ const Homepage_user = () => {
             }
             title={post.title}
             caption={post.content}
-            likesCount={post.likes_count}
+            initialLikesCount={post.likes_count}
+            initialLiked={post.liked} 
             comments={post.comments || []}
             onDelete={() => handleDelete(post.id)}
             onUpdate={() => handleUpdate(post.id)}
