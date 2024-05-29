@@ -8,23 +8,24 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
   const [inputError, setInputError] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
-
   //Setting components to edit mode
   const handleEdit = () => {
     setIsEditing(true);
     setShowMenu(false);
-
   };
   // Canceling the edit mode and reseting the input field
+
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditContent(comment.content);
     setInputError('');
   };
   // Handeling the update of editContent state when the value of the input changes
+
   const handleEditChange = (e) => {
     setEditContent(e.target.value);
   };
+
   const handleEditSubmit = (e) => {
     e.preventDefault();
     if (editContent.trim() === '') {
@@ -43,6 +44,7 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
         setInputError('Failed to update comment');
       });
   };
+
   const handleDelete = () => {
     axiosInstance.delete(`/comments/${comment.id}`)
       .then(() => {
@@ -57,6 +59,7 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
   return (
     <div className="comment">
       {isEditing ? (
@@ -72,7 +75,7 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
         </form>
       ) : (
         <>
-          <span className="comment-username">{comment.username}</span> {comment.content}
+          <span className="comment-username">{comment.user.username}</span> {comment.content}
           {currentUserId === comment.user_id && (
             <div className="menu-container">
               <FaEllipsisH onClick={toggleMenu} className="menu-icon" />

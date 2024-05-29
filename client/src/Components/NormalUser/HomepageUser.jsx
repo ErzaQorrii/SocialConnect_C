@@ -98,7 +98,7 @@ const Homepage_user = () => {
             title={post.title}
             caption={post.content}
             initialLikesCount={post.likes_count}
-            initialLiked={post.liked} 
+            initialLiked={post.liked}
             comments={post.comments || []}
             onDelete={() => handleDelete(post.id)}
             onUpdate={() => handleUpdate(post.id)}
