@@ -15,9 +15,18 @@
             {
                 navigate('/profile');
             };
+            const goToFriends = () => {
+                navigate('/friends');
+              }
+              const goToGroups = () => {
+                navigate('/groups');
+              }
+       
     return{
         goToHomePage,
         goToProfile,
+        goToFriends,
+        goToGroups
     };
         
     };

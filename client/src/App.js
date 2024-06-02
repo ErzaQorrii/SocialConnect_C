@@ -11,6 +11,8 @@ import NotAuthenticated from "./Components/NormalUser/NotAuthenticated";
 import PrivateRoute from "./Components/NormalUser/PrivateRoute";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ProfileComponent from "./Components/NormalUser/Profile/ProfileComponent";
+import GroupComponent from "./Components/NormalUser/Group/GroupComponent";
+
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
         <Route path="/create_post" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
         <Route path="/edit-post/:id" element={<PrivateRoute><EditPost /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><ProfileComponent /></PrivateRoute>} />
+        <Route path="/groups" element={<PrivateRoute><GroupComponent /></PrivateRoute>} />
+
+
 
 
         {/* <Route path="/user" element={<TestUser />} />                
