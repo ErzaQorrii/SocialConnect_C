@@ -75,7 +75,7 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
         </form>
       ) : (
         <>
-          <span className="comment-username">{comment.user.username}</span> {comment.content}
+          <span className="comment-username">{comment.user?.username}</span> {comment.content}
           {currentUserId === comment.user_id && (
             <div className="menu-container">
               <FaEllipsisH onClick={toggleMenu} className="menu-icon" />
