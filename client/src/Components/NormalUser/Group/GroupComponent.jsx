@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import groupAPI from './groupAPI';
+import './Groups.css';
 const GroupComponent = () => {
     
     const [yourGroups,setYouGroups] = useState([]);
@@ -29,9 +30,10 @@ const GroupComponent = () => {
 
 
     return (
-        <div>
+        <div className="groups-container">
+          <div className="your_group">
           <h1>Your Groups</h1>
-          <ul>
+          <ul className="groups-list">
             {yourGroups.map(group => (
               <li key={group.id}>
                 <h2>{group.name}</h2>
@@ -39,9 +41,10 @@ const GroupComponent = () => {
               </li>
             ))}
           </ul>
-          
+          </div>
+          <div className="others_group">
           <h1>Other People's Groups</h1>
-          <ul>
+          <ul className="groups-list">
             {otherGroups.map(group => (
               <li key={group.id}>
                 <h2>{group.name}</h2>
@@ -50,6 +53,7 @@ const GroupComponent = () => {
             ))}
           </ul>
         </div>
+        </div>
       );
     };
-export default GroupComponent
+export default GroupComponent;

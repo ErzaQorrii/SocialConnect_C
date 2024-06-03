@@ -1,0 +1,43 @@
+.groups-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    gap: 100px;
+  }
+  
+  .groups-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .groups-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .groups-list li {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+  }
+  
+  .groups-list li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .groups-list h2 {
+    font-size: 20px;
+    color: #555;
+    margin: 0;
+  }
+  
+  .groups-list p {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+  }
+  
