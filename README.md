@@ -1,6 +1,6 @@
 # SocialConnect_C
 # Introduction
-Social App is a modern social networking platform built with React. It allows users to create profiles, post updates,  and interact with the community through comments and likes.
+SocialConnect is a  social networking platform built with React. It allows users to create profiles, post updates,  and interact with the community through comments and likes.
 
 # Features
 User Authentication (Sign Up, Login, Logout),
