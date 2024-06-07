@@ -11,13 +11,21 @@ Commenting and Liking Posts
 
 # Installation
 To get started with the Social App, follow these steps:
-Clone the repository
-git clone https://github.com/ErzaQorrii/SocialConnect_C.git
 
-1)Navigate to the project directory
+1)Clone the repository
+
+git clone https://github.com/ErzaQorrii/SocialConnect_C.git 
+
+2)Navigate to the project directory.
+
 cd sd client
-2)Install dependencies
+
+3)Install dependencies.
+
 npm install
-3)Start the development server
+
+4)Start the development server.
+
 npm start
+
 => The application will be available at http://localhost:3000
