@@ -37,6 +37,7 @@ The Groups Page in Social Connect allows users to manage their groups and discov
 Commenting and Liking Posts
 
 Users can interact with posts by liking, commenting, and using options to edit or delete their own posts. Each post displays the author's username, a title, an image, a like button showing the number of likes, and a caption that can be expanded. The comments section shows the number of comments, displays existing comments, and includes a field to add new comments.
+
  ![Login](/images/edit_delete_comment.png)
 
 
