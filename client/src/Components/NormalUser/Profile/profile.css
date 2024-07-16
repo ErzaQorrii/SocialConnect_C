@@ -1,11 +1,10 @@
-/* Container */
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgboisa(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
   }
   
@@ -127,7 +126,7 @@
     background-color: #d32f2f;
   }
   /* Add image upload styles */
-.profile-image {
+/* .profile-image {
     display: block;
     margin: 0 auto 20px;
     border-radius: 50%;
@@ -135,7 +134,7 @@
     height: 150px;
     object-fit: cover;
     border: 2px solid #ddd;
-  }
+  } */
   
   .image-upload {
     text-align: center;

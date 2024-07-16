@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axiosSetup";
 
@@ -40,28 +41,28 @@ const useProfile = (userId) => {
       setIsLoading(false);
     });
   };
- // Function to  delete the profile of the user
-  const deleteProfile = (id) => {
-    setIsLoading(true);
-    axiosInstance
-      .delete(`/user/${id}`)
-      .then(() => {
-        setProfile({});
-        setError("");
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError("Failed to delete  profile");
-        setIsLoading(false);
-      });
-  };
+//  // Function to  delete the profile of the user
+//   const deleteProfile = (id) => {
+//     setIsLoading(true);
+//     axiosInstance
+//       .delete(`/user/${id}`)
+//       .then(() => {
+//         setProfile({});
+//         setError("");
+//         setIsLoading(false);
+//       })
+//       .catch((error) => {
+//         setError("Failed to delete  profile");
+//         setIsLoading(false);
+//       });
+//   };
   return {
     profile,
     isLoading,
     error,
     fetchProfile,
     updateProfile,
-    deleteProfile,
+    // deleteProfile,
   };
 };
 export default useProfile;

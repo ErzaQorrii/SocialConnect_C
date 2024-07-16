@@ -12,6 +12,7 @@ import PrivateRoute from "./Components/NormalUser/PrivateRoute";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ProfileComponent from "./Components/NormalUser/Profile/ProfileComponent";
 import GroupComponent from "./Components/NormalUser/Group/GroupComponent";
+import CreateGroup from "./Components/NormalUser/Group/CreateGroup";
 
 
 function App() {
@@ -23,10 +24,14 @@ function App() {
         <Route path="/signup" element={<Signup action="Sign Up" />} />
         <Route path="/not-authenticated" element={<NotAuthenticated />} />
         <Route path="/home_user" element={<PrivateRoute><HomepageUser /></PrivateRoute>} />
+
         <Route path="/create_post" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
         <Route path="/edit-post/:id" element={<PrivateRoute><EditPost /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><ProfileComponent /></PrivateRoute>} />
         <Route path="/groups" element={<PrivateRoute><GroupComponent /></PrivateRoute>} />
+        <Route path="/create_groups" element={<PrivateRoute><CreateGroup /></PrivateRoute>} />
+
+
 
 
 

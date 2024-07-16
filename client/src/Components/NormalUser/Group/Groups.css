@@ -1,43 +1,166 @@
 .groups-container {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    display: flex;
-    gap: 100px;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  display: flex;
+  gap: 50px;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+}
+
+.groups-container h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.groups-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 300px;
+}
+
+.groups-list li {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.groups-list li:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.groups-list h2 {
+  font-size: 22px;
+  color: #555;
+  margin: 0 0 10px 0;
+}
+
+.groups-list p {
+  font-size: 16px;
+  color: #777;
+  margin: 0;
+}
+
+.create-group-button {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.create-group-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.create-group-button:focus {
+  outline: none;
+}
+
+.create-group-container {
+  max-width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  width: 30%;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.create-group-container h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.create-group-container .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.create-group-container label {
+  display: block;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.create-group-container input,
+.create-group-container textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.create-group-container input:focus,
+.create-group-container textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.create-group-container button {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.create-group-container button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.create-group-container button:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .groups-container {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .groups-container h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
+
   .groups-list {
-    list-style: none;
-    padding: 0;
+    width: 100%;
+    max-width: 500px;
   }
-  
-  .groups-list li {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease;
+
+  .create-group-container {
+    width: 90%;
   }
-  
-  .groups-list li:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .groups-list h2 {
-    font-size: 20px;
-    color: #555;
-    margin: 0;
-  }
-  
-  .groups-list p {
-    font-size: 14px;
-    color: #777;
-    margin-top: 5px;
-  }
-  
+}

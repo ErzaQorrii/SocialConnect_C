@@ -32,10 +32,12 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
       setInputError('Comment cannot be empty');
       return;
     }
-
+     
     axiosInstance.put(`/comments/${comment.id}`, { content: editContent })
       .then((response) => {
+        //Exit edit mode
         setIsEditing(false);
+        //Clear input errors
         setInputError('');
         onUpdate(response.data);
       })
@@ -75,6 +77,7 @@ const CommentItem = ({ comment, onUpdate, onDelete, currentUserId }) => {
         </form>
       ) : (
         <>
+      {console.log('comment:', comment)}
           <span className="comment-username">{comment.user?.username}</span> {comment.content}
           {currentUserId === comment.user_id && (
             <div className="menu-container">

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NotAuthenticated = () => {
-  const navigate = useNavigate(); // Correctly assign navigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const timeout = setTimeout(() => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { likePost, dislikePost, getPostLikes } from "./likeAPI";
 import { Tooltip } from "react-tooltip";
 
+
 const LikeButton = ({ postId, initialLiked, initialLikesCount }) => {
   //
   const [liked, setLiked] = useState(initialLiked);
@@ -18,6 +19,7 @@ const LikeButton = ({ postId, initialLiked, initialLikesCount }) => {
 
   const handleLike = () => {
     setLoading(true);
+    //if the post is liked
     if (liked) {
       dislikePost(postId)
         .then(() => {
@@ -27,6 +29,7 @@ const LikeButton = ({ postId, initialLiked, initialLikesCount }) => {
         .catch((error) => console.error("Error disliking post:", error))
         .finally(() => setLoading(false));
     } else {
+      //if the post is not liked
       likePost(postId)
         .then(() => {
           setLiked(true);
@@ -50,10 +53,21 @@ const LikeButton = ({ postId, initialLiked, initialLikesCount }) => {
         setLikes([]); 
       });
   };
+  const buttonStyle = {
+    backgroundColor: liked ? '#e74c3c' : '#f0f0f0', 
+    color: liked ? '#fff' : '#000', 
+    border: 'none',
+    borderRadius: '20px', 
+    padding: '10px 20px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    transition: 'background-color 0.3s ease, color 0.3s ease',
+  };
 
   return (
     <div>
       <button
+       style={buttonStyle}
         onClick={handleLike}
         disabled={loading}
         data-tooltip-id={`like-tooltip-${postId}`}

@@ -19,7 +19,7 @@ const PostCard = forwardRef(({ id, username, profileImageUrl, postImageUrl, capt
   useEffect(() => {
     getPostComments(id)
       .then(data => setPostComments(data))
-      .catch(error => console.error('Error fetching comments:', error));
+      .catch(error => console.log('Error fetching comments:', error));
   }, [id]);
 
   const toggleExpand = () => {
@@ -37,7 +37,7 @@ const PostCard = forwardRef(({ id, username, profileImageUrl, postImageUrl, capt
   const handleCommentCreated = (newComment) => {
     setPostComments([...postComments, newComment]);
   };
-
+  
   const handleCommentUpdate = (updatedComment) => {
     setPostComments(postComments.map(comment => comment.id === updatedComment.id ? updatedComment : comment));
   };
@@ -53,7 +53,7 @@ const PostCard = forwardRef(({ id, username, profileImageUrl, postImageUrl, capt
   return (
     <div className="post-card" ref={ref}>
       <div className="post-header">
-        <img src={profileImageUrl} alt="Profile" className="profile-image" />
+        {/* <img src={profileImageUrl} alt="Profile" className="profile-image" /> */}
         <span className="username">{username}</span>
         {currentUserId === userId && (
           <div className="menu-container">

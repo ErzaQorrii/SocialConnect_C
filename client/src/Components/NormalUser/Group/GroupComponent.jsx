@@ -1,10 +1,13 @@
 import React, {useState,useEffect} from 'react';
 import groupAPI from './groupAPI';
-import './Groups.css';
+// import './Groups.css';
+import  useNavigation from '../navigationUtils';
+
 const GroupComponent = () => {
     
     const [yourGroups,setYouGroups] = useState([]);
     const [otherGroups,setOtherGroups] = useState([]);
+    const {goToCreateGroups} = useNavigation();
 
     useEffect(()=>{
         const fetchGroups = async () =>
@@ -33,6 +36,7 @@ const GroupComponent = () => {
         <div className="groups-container">
           <div className="your_group">
           <h1>Your Groups</h1>
+          <button onClick={goToCreateGroups} className="create-group-button">Create a Group</button>
           <ul className="groups-list">
             {yourGroups.map(group => (
               <li key={group.id}>

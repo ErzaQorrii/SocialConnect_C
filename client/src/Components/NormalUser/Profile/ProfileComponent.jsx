@@ -9,6 +9,7 @@ const ProfileComponent = () => {
     const [inputError,setInputError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    //Update local profile with new data
    useEffect(()=>
     {
         setLocalProfile(profile);
@@ -16,9 +17,11 @@ const ProfileComponent = () => {
 
     const handleInputChange = (e)=>
         {
+            //updating prporties of the localProfile object
             const{name,value} = e.target;
             setLocalProfile({...localProfile,[name]:value});
         };
+        //Saves the data when the user clicks the submit button
         const handleSave = (e) => {
             e.preventDefault();
             updateProfile(localProfile)

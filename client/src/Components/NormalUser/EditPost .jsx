@@ -5,6 +5,7 @@ import axiosInstance from './axiosSetup';
 import { useNavigation } from './navigationUtils';
 
 const EditPost = () => {
+  // Extracted from URL parameters to know which post to edit.
   const { id } = useParams();
   const navigate = useNavigate();
   const [inputErrorList, setInputErrorList] = useState({});
@@ -35,6 +36,7 @@ const EditPost = () => {
   }, [id]);
 
   const handleInput = (e) => {
+    //Data that user typed
     const { name, value, files } = e.target;
     if (name === 'image' && files.length > 0) {
       setPost({ ...post, [name]: files[0] });
@@ -45,7 +47,7 @@ const EditPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+   // Form data object for files
     const formData = new FormData();
     formData.append('_method', 'PUT');
     formData.append('title', post.title);
@@ -55,6 +57,7 @@ const EditPost = () => {
     }
 
     axiosInstance.post(`/posts/${id}`, formData, {
+      // Handeling file upload correctly
         headers:
         {
             'Content-Type': 'multipart/form-data'
@@ -66,6 +69,8 @@ const EditPost = () => {
       goToHomePage();
         })
     .catch(error => {
+              console.error('Error response:', error.response); // Add detailed error logging
+
       if (error.response) {
         if (error.response.status === 422) {
           setInputErrorList(error.response.data.errors);

@@ -1,34 +1,32 @@
- import { useNavigate} from 'react-router-dom';
-  
- export const useNavigation= () =>
-    {
-        const navigate = useNavigate();
-    
+import { useNavigate } from "react-router-dom";
 
-    const goToHomePage = () =>
-        {
-            navigate('/home_user');
-        };
+export const useNavigation = () => {
+  const navigate = useNavigate();
 
-      
-        const goToProfile = () =>
-            {
-                navigate('/profile');
-            };
-            const goToFriends = () => {
-                navigate('/friends');
-              }
-              const goToGroups = () => {
-                navigate('/groups');
-              }
-       
-    return{
-        goToHomePage,
-        goToProfile,
-        goToFriends,
-        goToGroups
-    };
-        
-    };
+  const goToHomePage = () => {
+    navigate("/home_user");
+  };
 
-export default  useNavigation;
+  const goToProfile = () => {
+    navigate("/profile");
+  };
+  const goToFriends = () => {
+    navigate("/friends");
+  };
+  const goToGroups = () => {
+    navigate("/groups");
+  };
+  const goToCreateGroups = () => {
+    navigate("/create_groups");
+  };
+
+  return {
+    goToHomePage,
+    goToProfile,
+    goToFriends,
+    goToGroups,
+    goToCreateGroups,
+  };
+};
+
+export default useNavigation;

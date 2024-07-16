@@ -47,14 +47,16 @@ const Homepage_user = () => {
 
   const lastPostElementRef = useCallback(
     (node) => {
+      //Disconnect any old observer.
       if (observer.current) observer.current.disconnect();
-
+      //Create a new observer.
       observer.current = new IntersectionObserver((entries) => {
+        //If the last post is in view and there are more posts to load, fetch the next page of posts.
         if (entries[0].isIntersecting && pagination.has_more_pages) {
           loadMorePosts(pagination.current_page + 1);
         }
       });
-
+          // observing the last post element.
       if (node) observer.current.observe(node);
     },
     [pagination]
@@ -87,9 +89,9 @@ const Homepage_user = () => {
             id={post.id}
             ref={posts.length === index + 1 ? lastPostElementRef : null}
             username={post.user ? post.user.name : "Unknown User"}
-            profileImageUrl={
-              post.user ? post.user.profileImageUrl : "default-profile.png"
-            }
+            // profileImageUrl={
+            //   post.user ? post.user.profileImageUrl : "default-profile.png"
+            // }
             postImageUrl={
               post.image
                 ? `http://127.0.0.1:8000${post.image}`
